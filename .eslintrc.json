@@ -1,0 +1,19 @@
+{
+  "extends": ["universe/native"],
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+  "plugins": ["simple-import-sort", "sort-destructure-keys", "sort-keys-fix"],
+  "rules": {
+    "react/jsx-sort-props": "error",
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": "error",
+    "sort-destructure-keys/sort-destructure-keys": "error",
+    "sort-keys-fix/sort-keys-fix": "error"
+  }
+}
