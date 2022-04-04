@@ -10,6 +10,7 @@
   ],
   "plugins": ["simple-import-sort", "sort-destructure-keys", "sort-keys-fix"],
   "rules": {
+    "react-hooks/exhaustive-deps": "error",
     "react/jsx-sort-props": "error",
     "simple-import-sort/exports": "error",
     "simple-import-sort/imports": "error",

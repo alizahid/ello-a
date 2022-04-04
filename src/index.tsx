@@ -1,29 +1,44 @@
+import { NavigationContainer } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
 import { StatusBar } from 'expo-status-bar'
-import React, { FunctionComponent } from 'react'
-import { KeyboardAvoidingView, Platform, Text, View } from 'react-native'
+import React, { FunctionComponent, useEffect } from 'react'
+import { KeyboardAvoidingView, Platform } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+import { useAuth } from './hooks/auth'
+import { useProfile } from './hooks/auth/profile'
 import { FONTS } from './lib/config'
-import { tw } from './styles'
+import { LandingNavigator } from './navigators/landing'
+import { tw } from './styles/tailwind'
+import { theme } from './styles/theme'
 
 export const Ello: FunctionComponent = () => {
   const [loaded] = useFonts(FONTS)
 
-  if (!loaded) {
+  const { loading, user } = useAuth()
+  const { loading: fetching, profile, refetch } = useProfile()
+
+  useEffect(() => {
+    if (user) {
+      refetch()
+    }
+  }, [user, refetch])
+
+  if (!loaded || loading || fetching) {
     return null
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={tw`flex-1`}>
-      <StatusBar />
+    <SafeAreaProvider>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={tw`flex-1`}>
+        <StatusBar />
 
-      <View style={tw`items-center justify-center flex-1`}>
-        <Text style={tw`text-2xl font-ello-bold`}>Ello</Text>
-        <Text style={tw`mt-3 text-xl font-ello-medium`}>Ello</Text>
-        <Text style={tw`mt-3 text-base font-ello-regular`}>Ello</Text>
-      </View>
-    </KeyboardAvoidingView>
+        <NavigationContainer theme={theme}>
+          {profile ? null : user ? null : <LandingNavigator />}
+        </NavigationContainer>
+      </KeyboardAvoidingView>
+    </SafeAreaProvider>
   )
 }
