@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 
 import { Query, QueryUserCollectionArgs, User } from '../../types/graphql'
+import { useAuth } from './index'
 
 export const PROFILE = gql`
   query profile($filter: UserFilter) {
@@ -26,7 +27,9 @@ type Returns = {
   refetch: () => void
 }
 
-export const useProfile = (id: string): Returns => {
+export const useProfile = (): Returns => {
+  const { session } = useAuth()
+
   const { data, loading, refetch } = useQuery<
     Pick<Query, 'userCollection'>,
     QueryUserCollectionArgs
@@ -34,7 +37,7 @@ export const useProfile = (id: string): Returns => {
     variables: {
       filter: {
         id: {
-          eq: id
+          eq: session?.user.id
         }
       }
     }

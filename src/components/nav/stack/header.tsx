@@ -1,3 +1,4 @@
+import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs'
 import { StackHeaderProps } from '@react-navigation/stack'
 import { FunctionComponent } from 'react'
 import { Pressable, Text, View } from 'react-native'
@@ -6,13 +7,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { tw } from '../../../styles/tailwind'
 import { Icon } from '../../common/icon'
 
-export const StackHeader: FunctionComponent<StackHeaderProps> = ({
-  back,
-  navigation,
-  options,
-  route
-}) => {
+export const StackHeader: FunctionComponent<
+  StackHeaderProps | BottomTabHeaderProps
+> = ({ navigation, options, route, ...props }) => {
   const { top } = useSafeAreaInsets()
+
+  const back = !!(props as StackHeaderProps).back
 
   return (
     <View

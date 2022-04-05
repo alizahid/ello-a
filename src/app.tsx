@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const App: FunctionComponent<Props> = ({ session }) => {
-  const { loading, profile, refetch } = useProfile(session?.user?.id)
+  const { loading, profile, refetch } = useProfile()
 
   useEffect(() => {
     if (session) {

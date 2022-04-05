@@ -26,8 +26,8 @@ export const Ello: FunctionComponent = () => {
   const { session } = useAuth()
 
   useEffect(() => {
-    client.current = createClient(session.access_token)
-  }, [session.access_token])
+    client.current = createClient(session?.access_token)
+  }, [session?.access_token])
 
   if (!loaded) {
     return <Loading />

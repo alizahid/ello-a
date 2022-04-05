@@ -1,7 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FunctionComponent } from 'react'
 
+import { StackHeader } from '../components/nav/stack/header'
+import { TabBar } from '../components/nav/tab/bar'
 import { Landing } from '../scenes/landing'
+import { PostsNavigator } from './posts'
 
 export type MainParams = {
   Posts: undefined
@@ -12,9 +15,31 @@ export type MainParams = {
 const { Navigator, Screen } = createBottomTabNavigator<MainParams>()
 
 export const MainNavigator: FunctionComponent = () => (
-  <Navigator>
-    <Screen component={Landing} name="Posts" />
-    <Screen component={Landing} name="CreatePost" />
-    <Screen component={Landing} name="Profile" />
+  <Navigator
+    screenOptions={{
+      header: (props) => <StackHeader {...props} />
+    }}
+    tabBar={(props) => <TabBar {...props} />}>
+    <Screen
+      component={PostsNavigator}
+      name="Posts"
+      options={{
+        headerShown: false
+      }}
+    />
+    <Screen
+      component={Landing}
+      name="CreatePost"
+      options={{
+        title: 'New'
+      }}
+    />
+    <Screen
+      component={Landing}
+      name="Profile"
+      options={{
+        title: 'Profile'
+      }}
+    />
   </Navigator>
 )
