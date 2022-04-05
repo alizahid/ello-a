@@ -14,7 +14,7 @@ import { tw } from '../styles/tailwind'
 type Props = StackScreenProps<LandingParams, 'SignIn'>
 
 export const SignIn: FunctionComponent<Props> = ({ navigation }) => {
-  const { error, loading, signIn, success } = useSignIn()
+  const { error, loading, signIn } = useSignIn()
 
   const emailRef = useRef<TextInput>()
   const passwordRef = useRef<TextInput>()
@@ -44,14 +44,6 @@ export const SignIn: FunctionComponent<Props> = ({ navigation }) => {
 
       <View>
         {!!error && <Message message={error} style={tw`mb-6`} type="error" />}
-
-        {success && (
-          <Message
-            message="Check your email for a magic link."
-            style={tw`mb-6`}
-            type="success"
-          />
-        )}
 
         <Input
           autoCapitalize="none"

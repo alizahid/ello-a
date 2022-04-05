@@ -1,7 +1,23 @@
-import { User } from '@prisma/client'
-import { useCallback, useEffect, useState } from 'react'
+import { gql, useQuery } from '@apollo/client'
 
-import { supabase } from '../../lib/supabase'
+import { Query, QueryUserCollectionArgs, User } from '../../types/graphql'
+
+export const PROFILE = gql`
+  query profile($filter: UserFilter) {
+    userCollection(filter: $filter) {
+      edges {
+        node {
+          id
+          email
+          name
+          image
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`
 
 type Returns = {
   loading: boolean
@@ -10,33 +26,23 @@ type Returns = {
   refetch: () => void
 }
 
-export const useProfile = (): Returns => {
-  const [loading, setLoading] = useState(true)
-  const [profile, setProfile] = useState<User>()
-
-  const fetch = useCallback(async () => {
-    const user = supabase.auth.user()
-
-    const { data } = await supabase
-      .from('User')
-      .select('*')
-      .eq('id', user.id)
-      .single()
-
-    if (data) {
-      setProfile(data)
+export const useProfile = (id: string): Returns => {
+  const { data, loading, refetch } = useQuery<
+    Pick<Query, 'userCollection'>,
+    QueryUserCollectionArgs
+  >(PROFILE, {
+    variables: {
+      filter: {
+        id: {
+          eq: id
+        }
+      }
     }
-
-    setLoading(false)
-  }, [])
-
-  useEffect(() => {
-    fetch()
-  }, [fetch])
+  })
 
   return {
     loading,
-    profile,
-    refetch: fetch
+    profile: data?.userCollection.edges.at(0)?.node,
+    refetch
   }
 }

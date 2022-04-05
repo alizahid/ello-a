@@ -1,31 +1,36 @@
+import {
+  ApolloClient,
+  ApolloProvider,
+  NormalizedCacheObject
+} from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
 import { StatusBar } from 'expo-status-bar'
-import React, { FunctionComponent, useEffect } from 'react'
+import { FunctionComponent, useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, Platform } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+import { App } from './app'
+import { Loading } from './components/common/loading'
 import { useAuth } from './hooks/auth'
-import { useProfile } from './hooks/auth/profile'
+import { createClient } from './lib/apollo'
 import { FONTS } from './lib/config'
-import { LandingNavigator } from './navigators/landing'
 import { tw } from './styles/tailwind'
 import { theme } from './styles/theme'
 
 export const Ello: FunctionComponent = () => {
+  const client = useRef<ApolloClient<NormalizedCacheObject>>()
+
   const [loaded] = useFonts(FONTS)
 
-  const { loading, user } = useAuth()
-  const { loading: fetching, profile, refetch } = useProfile()
+  const { session } = useAuth()
 
   useEffect(() => {
-    if (user) {
-      refetch()
-    }
-  }, [user, refetch])
+    client.current = createClient(session.access_token)
+  }, [session.access_token])
 
-  if (!loaded || loading || fetching) {
-    return null
+  if (!loaded) {
+    return <Loading />
   }
 
   return (
@@ -35,9 +40,11 @@ export const Ello: FunctionComponent = () => {
         style={tw`flex-1`}>
         <StatusBar />
 
-        <NavigationContainer theme={theme}>
-          {profile ? null : user ? null : <LandingNavigator />}
-        </NavigationContainer>
+        <ApolloProvider client={client.current}>
+          <NavigationContainer theme={theme}>
+            <App session={session} />
+          </NavigationContainer>
+        </ApolloProvider>
       </KeyboardAvoidingView>
     </SafeAreaProvider>
   )

@@ -1,5 +1,13 @@
 {
-  "extends": ["universe/native"],
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "@react-native-community",
+    "plugin:react/jsx-runtime",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   "overrides": [
     {
       "files": ["*.js"],
@@ -8,8 +16,16 @@
       }
     }
   ],
-  "plugins": ["simple-import-sort", "sort-destructure-keys", "sort-keys-fix"],
+  "plugins": [
+    "simple-import-sort",
+    "sort-destructure-keys",
+    "sort-keys-fix",
+    "prettier"
+  ],
   "rules": {
+    "no-catch-shadow": "off",
+    "no-shadow": "off",
+    "prettier/prettier": "error",
     "react-hooks/exhaustive-deps": "error",
     "react/jsx-sort-props": "error",
     "simple-import-sort/exports": "error",

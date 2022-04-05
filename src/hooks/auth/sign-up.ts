@@ -5,7 +5,6 @@ import { supabase } from '../../lib/supabase'
 type Returns = {
   error?: string
   loading: boolean
-  success: boolean
 
   signUp: (email: string, password: string) => void
 }
@@ -13,7 +12,6 @@ type Returns = {
 export const useSignUp = (): Returns => {
   const [error, setError] = useState<string>()
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
 
   const signUp: Returns['signUp'] = useCallback(async (email, password) => {
     setLoading(true)
@@ -25,8 +23,6 @@ export const useSignUp = (): Returns => {
 
     if (error) {
       setError(error.message)
-    } else {
-      setSuccess(true)
     }
 
     setLoading(false)
@@ -35,7 +31,6 @@ export const useSignUp = (): Returns => {
   return {
     error,
     loading,
-    signUp,
-    success
+    signUp
   }
 }

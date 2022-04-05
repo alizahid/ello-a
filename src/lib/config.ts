@@ -10,3 +10,7 @@ export const FONTS = {
   'Satoshi-Medium': require('../../assets/fonts/Satoshi-Medium.otf'),
   'Satoshi-Regular': require('../../assets/fonts/Satoshi-Regular.otf')
 }
+
+// image
+
+export const BASE64_JPG_PREFIX = 'data:image/jpeg;base64,'
