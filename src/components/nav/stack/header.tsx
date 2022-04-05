@@ -3,8 +3,8 @@ import { FunctionComponent } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { tw } from '../../styles/tailwind'
-import { Icon } from '../common/icon'
+import { tw } from '../../../styles/tailwind'
+import { Icon } from '../../common/icon'
 
 export const StackHeader: FunctionComponent<StackHeaderProps> = ({
   back,

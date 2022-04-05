@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { FunctionComponent } from 'react'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
 
-import { StackHeader } from '../components/nav/header'
+import { StackHeader } from '../components/nav/stack/header'
 import { Landing } from '../scenes/landing'
 import { SignIn } from '../scenes/sign-in'
 import { SignUp } from '../scenes/sign-up'
