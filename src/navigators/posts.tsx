@@ -4,7 +4,7 @@ import { useSafeAreaFrame } from 'react-native-safe-area-context'
 
 import { StackHeader } from '../components/nav/stack/header'
 import { Landing } from '../scenes/auth/landing'
-import { PostsList } from '../scenes/posts'
+import { PostsList } from '../scenes/posts/list'
 
 export type PostsParams = {
   List: undefined
