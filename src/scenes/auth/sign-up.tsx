@@ -3,15 +3,15 @@ import { FunctionComponent, useCallback, useRef, useState } from 'react'
 import { Keyboard, Pressable, Text, TextInput, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { Button } from '../components/common/button'
-import { Input } from '../components/common/input'
-import { Logo } from '../components/common/logo'
-import { Message } from '../components/common/message'
-import { useSignUp } from '../hooks/auth/sign-up'
-import { LandingParams } from '../navigators/landing'
-import { tw } from '../styles/tailwind'
+import { Button } from '../../components/common/button'
+import { Input } from '../../components/common/input'
+import { Logo } from '../../components/common/logo'
+import { Message } from '../../components/common/message'
+import { useSignUp } from '../../hooks/auth/sign-up'
+import { AuthParams } from '../../navigators/auth'
+import { tw } from '../../styles/tailwind'
 
-type Props = StackScreenProps<LandingParams, 'SignUp'>
+type Props = StackScreenProps<AuthParams, 'SignUp'>
 
 export const SignUp: FunctionComponent<Props> = ({ navigation }) => {
   const { error, loading, signUp } = useSignUp()

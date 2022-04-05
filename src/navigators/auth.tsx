@@ -3,19 +3,19 @@ import { FunctionComponent } from 'react'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
 
 import { StackHeader } from '../components/nav/stack/header'
-import { Landing } from '../scenes/landing'
-import { SignIn } from '../scenes/sign-in'
-import { SignUp } from '../scenes/sign-up'
+import { Landing } from '../scenes/auth/landing'
+import { SignIn } from '../scenes/auth/sign-in'
+import { SignUp } from '../scenes/auth/sign-up'
 
-export type LandingParams = {
+export type AuthParams = {
   Landing: undefined
   SignIn: undefined
   SignUp: undefined
 }
 
-const { Navigator, Screen } = createStackNavigator<LandingParams>()
+const { Navigator, Screen } = createStackNavigator<AuthParams>()
 
-export const LandingNavigator: FunctionComponent = () => {
+export const AuthNavigator: FunctionComponent = () => {
   const { width } = useSafeAreaFrame()
 
   return (

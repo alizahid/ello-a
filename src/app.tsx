@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect } from 'react'
 
 import { Loading } from './components/common/loading'
 import { useProfile } from './hooks/auth/profile'
-import { LandingNavigator } from './navigators/landing'
+import { AuthNavigator } from './navigators/auth'
 import { MainNavigator } from './navigators/main'
 import { Onboarding } from './scenes/onboarding'
 
@@ -32,5 +32,5 @@ export const App: FunctionComponent<Props> = ({ session }) => {
     return <Onboarding user={session.user} />
   }
 
-  return <LandingNavigator />
+  return <AuthNavigator />
 }

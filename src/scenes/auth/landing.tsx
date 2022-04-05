@@ -3,12 +3,12 @@ import { FunctionComponent } from 'react'
 import { Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { Button } from '../components/common/button'
-import { Logo } from '../components/common/logo'
-import { LandingParams } from '../navigators/landing'
-import { tw } from '../styles/tailwind'
+import { Button } from '../../components/common/button'
+import { Logo } from '../../components/common/logo'
+import { AuthParams } from '../../navigators/auth'
+import { tw } from '../../styles/tailwind'
 
-type Props = StackScreenProps<LandingParams, 'Landing'>
+type Props = StackScreenProps<AuthParams, 'Landing'>
 
 export const Landing: FunctionComponent<Props> = ({ navigation }) => (
   <SafeAreaView style={tw`items-center justify-center flex-1 p-12`}>

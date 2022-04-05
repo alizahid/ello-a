@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 
 import { StackHeader } from '../components/nav/stack/header'
 import { TabBar } from '../components/nav/tab/bar'
-import { Landing } from '../scenes/landing'
+import { Landing } from '../scenes/auth/landing'
 import { PostsNavigator } from './posts'
 
 export type MainParams = {
